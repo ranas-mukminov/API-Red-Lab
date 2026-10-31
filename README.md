@@ -31,3 +31,8 @@ what the lab demonstration shows, and why the fix works.
 All users, objects, tokens and fields are fictional lab data
 (`lab-alice`, `lab-bob`, and their lab objects). Nothing here refers
 to a real person, a real account, or a real API.
+
+## Recent additions
+
+- `api/server.py`: a real localhost-only HTTP server wrapping the vulnerable/fixed functions, with curl examples in `docs/curl-examples.md` and HTTP smoke tests.
+- `docs/attack-mapping.md` and `detections/sigma-rules.yml`: illustrative MITRE ATT&CK mapping and Sigma-style detection rules in lab log format.

@@ -1,0 +1,47 @@
+title: API Lab — Object Access Where Caller Differs From Owner
+id: lab-api-001
+status: experimental
+description: Lab-format rule for BOLA-style access.
+logsource:
+  product: api-red-lab
+  service: api
+detection:
+  selection:
+    route: '/objects/'
+  filter:
+    caller: 'owner'
+  condition: selection and not filter
+level: high
+tags:
+  - attack.t1078
+---
+title: API Lab — Auth With Unissued Token
+id: lab-api-002
+status: experimental
+description: Lab-format rule for an auth attempt whose token was never issued.
+logsource:
+  product: api-red-lab
+  service: api
+detection:
+  selection:
+    route: '/auth'
+    token_issued: false
+  condition: selection
+level: medium
+tags:
+  - attack.t1078
+---
+title: API Lab — Rate Limit Exceeded Repeatedly
+id: lab-api-003
+status: experimental
+description: Lab-format rule for repeated 429 responses from a single caller.
+logsource:
+  product: api-red-lab
+  service: api
+detection:
+  selection:
+    status: 429
+  condition: selection
+level: medium
+tags:
+  - attack.t1499
