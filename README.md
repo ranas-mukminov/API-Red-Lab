@@ -1,3 +1,24 @@
+> **Problem:** OWASP API flaws — BOLA, broken authentication, excessive data exposure, missing rate limiting — are easy to describe and hard to recognise in real responses.
+>
+> **What this is:** an API security lab with a localhost-only HTTP server: each flaw shown twice, vulnerable and fixed, with tests and curl examples. **Localhost only, fictional data only, no real API.**
+>
+> **Who it is for:** API developers and testers learning to find and fix API authorisation and data-exposure flaws.
+>
+> **Quickstart:**
+>
+> ```bash
+> git clone https://github.com/ranas-mukminov/API-Red-Lab.git
+> cd API-Red-Lab
+> python3 -m unittest discover -s tests -v
+> python3 api/server.py --mode vuln --port 12701
+> curl "http://127.0.0.1:12701/objects/obj-2?caller=lab-alice"
+> ```
+>
+> **Sample result (verified):** the vulnerable server returns Bob's lab object for Alice's request; the fixed server returns 403 for the same request. Tests: `15 OK`.
+>
+[![CI](https://github.com/ranas-mukminov/API-Red-Lab/actions/workflows/tests.yml/badge.svg)](https://github.com/ranas-mukminov/API-Red-Lab/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+---
 # API-Red-Lab
 
 A local lab for OWASP API security flaws, with each flaw shown twice:
@@ -14,8 +35,7 @@ vulnerable, then fixed. No network service, no real API, no real data.
 
 ## How the lab works
 
-There is no HTTP server here on purpose: the lab is pure functions in
-`api/vuln.py` and `api/fixed.py`, exercised by `tests/test_api_lab.py`.
+The lab is pure functions in `api/vuln.py` and `api/fixed.py`, exercised by `tests/test_api_lab.py`, plus a localhost-only HTTP server in `api/server.py` (see `docs/curl-examples.md`).
 That keeps the lab runnable anywhere Python runs, with no port, no
 deployment, and no chance of accidentally exposing a vulnerable service.
 
